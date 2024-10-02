@@ -4,9 +4,16 @@ const mongoose = require('mongoose');
 const session = require('express-session')
 const logger = require('morgan');
 const Role = require('./models/Role');
+require('dotenv').config();
 
-mongoose.connect('mongodb+srv://Selkyn:Nintendo34+@cluster0.l7pfy7z.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0',
-    {
+const dbUsername = process.env.DB_USERNAME;
+const dbPassword = process.env.DB_PASSWORD;
+const dbName = process.env.DB_NAME;
+const dbHost = process.env.DB_HOST;
+
+const mongoUri = `mongodb+srv://${dbUsername}:${dbPassword}@${dbHost}/?retryWrites=true&w=majority&appName=${dbName}`;
+
+mongoose.connect(mongoUri, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
